@@ -19,7 +19,7 @@ Instead of a local installation you may also load the library from https://unpkg
 ```html
 <script
   type="module"
-  src="https://unpkg.com/@fboes/twentyfour-hours-clock@latest/dist/twentyfour-hours-clock.js"
+  src="https://unpkg.com/twentyfour-hours-clock@latest/dist/twentyfour-hours-clock.js"
 ></script>
 ```
 
@@ -42,7 +42,7 @@ Invoke a new instance by placing this into your HTML source code:
 ```
 <custom-element-demo>
   <template>
-    <script type="module" src="https://unpkg.com/@fboes/twentyfour-hours-clock@latest/dist/twentyfour-hours-clock.js"></script>
+    <script type="module" src="https://unpkg.com/twentyfour-hours-clock@latest/dist/twentyfour-hours-clock.js"></script>
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
@@ -119,7 +119,7 @@ If you need extended compatibility, search for [Web Components Polyfills](https:
 ## Status
 
 [![GitHub version](https://badge.fury.io/gh/fboes%2Ftwentyfour-hours-clock.svg)](https://badge.fury.io/gh/fboes%2Ftwentyfour-hours-clock)
-[![npm version](https://badge.fury.io/js/%40fboes%2Ftwentyfour-hours-clock.svg)](https://badge.fury.io/js/%40fboes%2Ftwentyfour-hours-clock)
+[![npm version](https://badge.fury.io/js/twentyfour-hours-clock.svg)](https://badge.fury.io/js/twentyfour-hours-clock)
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@fboes/twentyfour-hours-clock)
 ![MIT license](https://img.shields.io/github/license/fboes/twentyfour-hours-clock.svg)
 
