@@ -58,14 +58,15 @@ Invoke a new instance by placing this into your HTML source code:
 
 Properties can be set on initialization via HTML attributes, or selecting the DOM node via JavaScript and setting the properties of the DOM node.
 
-| Name       | Type                  | Default      | Description                                                                                                                                                                                                 |
-| ---------- | --------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `width`    | ?`number`             | `512`        | Width of element in pixels                                                                                                                                                                                  |
-| `height`   | ?`number`             | `512`        | Height of element in pixels                                                                                                                                                                                 |
-| `datetime` | ?`string`             | current date | String to set clock to (see [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse)). Will be set to current time if empty. Example: `2011-10-10T14:48:00`.\* |
-| `lon`      | ?`number` \| `"auto"` | `undefined`  | Decimal longitude. Set to `"auto"` to ask browser for geolocation                                                                                                                                           |
-| `lat`      | ?`number` \| `"auto"` | `undefined`  | Decimal latitude. Set to `"auto"` to ask browser for geolocation                                                                                                                                            |
-| `interval` | ?`number`             | `1000`       | Interval for moving second hand in ms                                                                                                                                                                       |
+| Name              | Type                  | Default      | Description                                                                                                                                                                                                 |
+| ----------------- | --------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `width`           | ?`number`             | `512`        | Width of element in pixels                                                                                                                                                                                  |
+| `height`          | ?`number`             | `512`        | Height of element in pixels                                                                                                                                                                                 |
+| `datetime`        | ?`string`             | current date | String to set clock to (see [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse)). Will be set to current time if empty. Example: `2011-10-10T14:48:00`.\* |
+| `longitude`       | ?`number` \| `"auto"` | `undefined`  | Decimal longitude. Set to `"auto"` to ask browser for geolocation                                                                                                                                           |
+| `latitude`        | ?`number` \| `"auto"` | `undefined`  | Decimal latitude. Set to `"auto"` to ask browser for geolocation                                                                                                                                            |
+| `frequency`       | ?`number`             | `1`          | How many times per second should the clock be updated. `0` makes the clock static, as a number small than `1` will remove the second hand.                                                                  |
+| `twilight-degree` | ?`number`             | `-6`         | At this sun elevation the clock changes from twilight to night.                                                                                                                                             |
 
 Types prefixed with `?` allow setting value to `undefined` as well.
 
@@ -85,14 +86,16 @@ To change the layout of the clock component use CSS variables. There is a set of
 
 ```css
 twentyfour-hours-clock {
+  --font-family: sans-serif;
   --color-background: black;
   --color-foreground: white;
   --color-watchhand: orange;
-  --color-night: #222;
-  --color-twilight: #aaa;
-  --color-day: white;
+  --color-night: #0f396c;
+  --color-twilight: #1d6fd3;
+  --color-day: #a1c5f2;
   --stroke-width: 1px;
   --stroke-width-watchhand: 2px;
+  --stroke-width-daylight: 2px;
 }
 ```
 
