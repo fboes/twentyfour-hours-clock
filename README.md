@@ -2,6 +2,8 @@
 
 A Vanilla JavaScript [web component](https://www.webcomponents.org/) which displays a self-contained twenty-four hours clock with a scale for night, twilight and day.
 
+![](example.png)
+
 For a demo see https://fboes.github.io/twentyfour-hours-clock/dist/.
 
 ## Installation
@@ -21,7 +23,7 @@ Instead of a local installation you may also load the library from https://unpkg
 ></script>
 ```
 
-Everything required for the front-end functionality of this web component is contained in [`twentyfour-hours-clock.js`](twentyfour-hours-clock.js).
+Everything required for the front-end functionality of this web component is contained in [`twentyfour-hours-clock.js`](./dist/twentyfour-hours-clock.js).
 
 ---
 
