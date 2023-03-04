@@ -18,5 +18,12 @@
     "prettier": "2.8.4",
     "typescript": "^4.9.5"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fboes/twentyfour-hours-clock.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fboes/twentyfour-hours-clock/issues"
+  },
   "homepage": "https://github.com/fboes/twentyfour-hours-clock#readme"
 }
