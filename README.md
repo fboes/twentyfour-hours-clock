@@ -11,7 +11,7 @@ For a demo see https://fboes.github.io/twentyfour-hours-clock/dist/.
 Either download the [`twentyfour-hours-clock.js`](twentyfour-hours-clock.js) to a sensible location in your web project, or do a NPM installation:
 
 ```bash
-npm install @fboes/twentyfour-hours-clock --save
+npm install twentyfour-hours-clock --save
 ```
 
 Instead of a local installation you may also load the library from https://unpkg.com/. Beware: This makes https://unpkg.com/ a dependency of your project and may pose data protection issues.
@@ -120,7 +120,7 @@ If you need extended compatibility, search for [Web Components Polyfills](https:
 
 [![GitHub version](https://badge.fury.io/gh/fboes%2Ftwentyfour-hours-clock.svg)](https://badge.fury.io/gh/fboes%2Ftwentyfour-hours-clock)
 [![npm version](https://badge.fury.io/js/twentyfour-hours-clock.svg)](https://badge.fury.io/js/twentyfour-hours-clock)
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/@fboes/twentyfour-hours-clock)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/twentyfour-hours-clock)
 ![MIT license](https://img.shields.io/github/license/fboes/twentyfour-hours-clock.svg)
 
 ## Legal stuff
