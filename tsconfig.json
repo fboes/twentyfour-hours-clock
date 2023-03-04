@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "target": "es2017",
+    "newLine": "LF",
+    "strict": true
+  }
+}

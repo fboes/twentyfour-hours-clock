@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Twenty-four hours clock - Web Component Demo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        font-size: 0.9em;
+      }
+      h1 {
+        border-bottom: 1px solid #ddd;
+        padding: 0.5em;
+        margin: 0 0 1em;
+      }
+      h1,
+      h2 {
+        font-size: 1.2em;
+      }
+      code {
+        font-family: "Courier New", Courier, monospace;
+      }
+      footer {
+        border-top: 1px solid #ddd;
+        padding: 0.5em;
+      }
+      a {
+        color: blue;
+      }
+      p {
+        text-align: left;
+      }
+      div.form {
+        display: flex;
+        flex-flow: row wrap;
+        column-gap: 2%;
+      }
+      div.form > * {
+        width: 49%;
+      }
+      @media screen and (max-width: 420px) {
+        div.form > * {
+          width: 100%;
+        }
+      }
+      @media screen and (min-width: 800px) {
+        div.form > * {
+          width: 32%;
+        }
+      }
+      label {
+        margin-bottom: 0.5em;
+        display: inline-block;
+        text-align: center;
+      }
+      label code {
+        display: inline-block;
+        width: 100%;
+        max-width: 15em;
+        margin-bottom: 0.25em;
+      }
+      footer {
+        padding: 1em;
+      }
+      input {
+        background-color: rgba(0, 0, 0, 0.02);
+        font: inherit;
+        color: inherit;
+        border: 1px solid;
+        padding: 0.25em 0.5em;
+        border-radius: 0.5em;
+      }
+      input[type="range"],
+      input[type="number"],
+      input[type="datetime-local"] {
+        width: 100%;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          color: white;
+          background-color: #222;
+        }
+        main {
+          border-color: #555;
+        }
+        a {
+          color: orange;
+        }
+      }
+    </style>
+    <script type="module" src="twentyfour-hours-clock.js"></script>
+  </head>
+  <body>
+    <h1>Twenty-four hours clock</h1>
+    <div>
+      <twentyfour-hours-clock id="twentyfour-one" width="512" height="512" longitude="auto" latitude="auto"></twentyfour-hours-clock>
+      <p>A Web Component showing a 24h clock, build as Scalabale Vector Graphic (SVG). The hour hand does a complete circle every 24h (instead of 12h like on a regular watchface). If the clock is given geo coordinates it is also able to show day, night and twilight.</p>
+    </div>
+    <h2>Properties</h2>
+    <div class="form">
+      <label>
+        <code>frequency</code>
+        <input type="number" value="1" min="0" max="10" step="0.5" name="frequency" oninput="twentyfour.setAttribute(this.name, this.value);" />
+      </label>
+      <label>
+        <code>twilight-degree</code>
+        <input type="range" value="-6" min="-18" max="-6" step="6" name="twilight-degree" oninput="twentyfour.setAttribute(this.name, this.value);" />
+      </label>
+      <label>
+        <code>longitude</code>
+        <input type="range" value="9" min="-180" max="180" step="0.001" name="longitude" oninput="twentyfour.setAttribute(this.name, this.value);" />
+      </label>
+      <label>
+        <code>latitude</code>
+        <input type="range" value="50" min="-90" max="90" step="0.001" name="latitude" oninput="twentyfour.setAttribute(this.name, this.value);" />
+      </label>
+      <label>
+        <code>datetime</code>
+        <input type="datetime-local" name="datetime" oninput="twentyfour.setAttribute(this.name, this.value);" />
+      </label>
+    </div>
+    <h2>CSS Variables</h2>
+    <div class="form">
+      <label>
+        <code>--color-background</code>
+        <input type="color" value="#000000" name="--color-background" oninput="twentyfour.style.setProperty(this.name, this.value);" />
+      </label>
+      <label>
+        <code>--color-foreground</code>
+        <input type="color" value="#ffffff" name="--color-foreground" oninput="twentyfour.style.setProperty(this.name, this.value);" />
+      </label>
+      <label>
+        <code>--color-watchhand</code>
+        <input type="color" value="#ffa500" name="--color-watchhand" oninput="twentyfour.style.setProperty(this.name, this.value);" />
+      </label>
+      <label>
+        <code>--color-night</code>
+        <input type="color" value="#0f396c" name="--color-night" oninput="twentyfour.style.setProperty(this.name, this.value);" />
+      </label>
+      <label>
+        <code>--color-twilight</code>
+        <input type="color" value="#1d6fd3" name="--color-twilight" oninput="twentyfour.style.setProperty(this.name, this.value);" />
+      </label>
+      <label>
+        <code>--color-day</code>
+        <input type="color" value="#a1c5f2" name="--color-day" oninput="twentyfour.style.setProperty(this.name, this.value);" />
+      </label>
+      <label>
+        <code>--stroke-width</code>
+        <input type="range" min="0.1" max="10" step="0.1" value="2.6" name="--stroke-width" oninput="twentyfour.style.setProperty(this.name, this.value + 'px');" />
+      </label>
+      <label>
+        <code>--stroke-width-watchhand</code>
+        <input type="range" min="0.1" max="20" step="0.1" value="5.2" name="--stroke-width-watchhand" oninput="twentyfour.style.setProperty(this.name, this.value + 'px');" />
+      </label>
+      <label>
+        <code>--stroke-width-daylight</code>
+        <input type="range" min="0.1" max="20" step="0.1" value="5.2" name="--stroke-width-daylight" oninput="twentyfour.style.setProperty(this.name, this.value + 'px');" />
+      </label>
+    </div>
+
+    <footer>
+      See
+      <a href="https://github.com/fboes/twentyfour-hours-clock">the GitHub documentation for <code>fboes/twentyfour-hours-clock</code></a>
+    </footer>
+
+    <script>
+      const twentyfour = document.getElementById("twentyfour-one");
+    </script>
+  </body>
+</html>

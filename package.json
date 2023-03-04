@@ -1,0 +1,22 @@
+{
+  "name": "twentyfour-hours-clock",
+  "version": "1.0.0",
+  "description": "A Web Component showing a 24h clock, build as Scalabale Vector Graphic (SVG). The hour hand does a complete circle every 24h (instead of 12h like on a regular watchface). If the clock is given geo coordinates it is also able to show day, night and twilight.",
+  "main": "dist/twentyfour-hours-clock.js",
+  "scripts": {
+    "prettier": "npx prettier --cache --write .",
+    "prettier-check": "npx prettier --cache --check .",
+    "build": "tsc --build"
+  },
+  "keywords": [
+    "web-component",
+    "clock"
+  ],
+  "author": "Frank Boës <info@3960.org> (https://3960.org/)",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "2.8.4",
+    "typescript": "^4.9.5"
+  },
+  "homepage": "https://github.com/fboes/twentyfour-hours-clock#readme"
+}
