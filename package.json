@@ -1,6 +1,6 @@
 {
   "name": "twentyfour-hours-clock",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Web Component showing a 24h clock, build as Scalabale Vector Graphic (SVG). The hour hand does a complete circle every 24h (instead of 12h like on a regular watchface). If the clock is given geo coordinates it is also able to show day, night and twilight.",
   "main": "dist/twentyfour-hours-clock.js",
   "scripts": {
