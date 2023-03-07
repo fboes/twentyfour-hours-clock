@@ -1,6 +1,6 @@
 class TwentyfourHourClock extends HTMLElement {
-  width = 256;
-  height = 256;
+  protected _width = 256;
+  protected _height = 256;
   protected _twilightDegree = -6;
   protected _datetime: Date;
   protected _longitude?: number;
@@ -16,7 +16,7 @@ class TwentyfourHourClock extends HTMLElement {
   };
 
   static get observedAttributes() {
-    return ["datetime", "longitude", "latitude", "frequency", "twilight-degree"];
+    return ["datetime", "longitude", "latitude", "frequency", "twilight-degree", "width", "height"];
   }
 
   constructor() {
@@ -39,8 +39,8 @@ class TwentyfourHourClock extends HTMLElement {
       this._latitude = this.getAttributeNumerical("latitude") ?? this._latitude;
     }
 
-    this.width = this.getAttributeNumerical("width") ?? this.width;
-    this.height = this.getAttributeNumerical("height") ?? this.height;
+    this._width = this.getAttributeNumerical("width") ?? this._width;
+    this._height = this.getAttributeNumerical("height") ?? this._height;
 
     this._twilightDegree = this.getAttributeNumerical("twilight-degree") ?? this._twilightDegree;
     const dt = this.getAttribute("datetime");
@@ -50,11 +50,10 @@ class TwentyfourHourClock extends HTMLElement {
         ? new TwentyfourSun(this._longitude, this._latitude, this._datetime, 0)
         : undefined;
 
-    this.elements.style.innerHTML = this.getStyle();
-    this.elements.svg.innerHTML = this.getSvg();
+    this.draw();
 
     let shadowRoot = this.attachShadow({ mode: "open" });
-    this.elements.svg.appendChild(this.elements.style);
+    shadowRoot.appendChild(this.elements.style);
     shadowRoot.appendChild(this.elements.svg);
   }
 
@@ -87,6 +86,12 @@ class TwentyfourHourClock extends HTMLElement {
         break;
       case "latitude":
         this.latitude = Number(newValue);
+        break;
+      case "width":
+        this.width = Number(newValue);
+        break;
+      case "height":
+        this.height = Number(newValue);
         break;
     }
   }
@@ -180,12 +185,35 @@ class TwentyfourHourClock extends HTMLElement {
     return lat;
   }
 
-  getAttributeNumerical(attrName: string): number | null {
+  set width(width: number) {
+    this._width = width;
+    this.draw();
+  }
+
+  get width() {
+    return this._width;
+  }
+
+  set height(height: number) {
+    this._height = height;
+    this.draw();
+  }
+
+  get height() {
+    return this._height;
+  }
+
+  protected draw() {
+    this.elements.style.innerHTML = this.getStyle();
+    this.elements.svg.innerHTML = this.getSvg();
+  }
+
+  protected getAttributeNumerical(attrName: string): number | null {
     const attr = this.getAttribute(attrName);
     return attr !== null ? Number(attr) : null;
   }
 
-  getStyle(): string {
+  protected getStyle(): string {
     const leUnit = this.lengthStroke;
     return `
 :host {
@@ -245,10 +273,13 @@ text.small {
 .secondary {
   ${leUnit <= 2.5 ? "display: none" : ""}
 }
+.tertiarty {
+  ${leUnit <= 3.5 ? "display: none" : ""}
+}
 `;
   }
 
-  getSvg(): string {
+  protected getSvg(): string {
     const center = this.center;
     const lengthStroke = this.lengthStroke;
     const lengthStrokePrimary = this.lengthStrokePrimary;
@@ -321,21 +352,21 @@ text.small {
     svg += `</g>`;
 
     svg += `<g inkscape:groupmode="layer" inkscape:label="Extra information">`;
-    /*svg += `<text id="utc" class="secondary" x="${center.x}" y="${
+    /*svg += `<text id="utc" class="tertiarty" x="${center.x}" y="${
       center.y - lengthStrokePrimary
     }" text-anchor="middle">UTC ${this.getTimezoneOffset()}</text>`;*/
 
-    svg += `<text id="lon" class="secondary small" x="${center.x}" y="${
+    svg += `<text id="lon" class="tertiarty small" x="${center.x}" y="${
       center.y - lengthStrokePrimary * 1
     }" text-anchor="middle">${this.longitudeString}</text>`;
-    svg += `<text id="lat" class="secondary small" x="${center.x}" y="${
+    svg += `<text id="lat" class="tertiarty small" x="${center.x}" y="${
       center.y - lengthStrokePrimary * 2
     }" text-anchor="middle">${this.latitudeString}</text>`;
 
-    svg += `<text id="date" class="secondary" x="${center.x}" y="${
+    svg += `<text id="date" class="tertiarty" x="${center.x}" y="${
       center.y + lengthStrokePrimary * 2
     }" text-anchor="middle">${this.getDate()}</text>`;
-    svg += `<text id="day" class="secondary" x="${center.x}" y="${
+    svg += `<text id="day" class="tertiarty" x="${center.x}" y="${
       center.y + lengthStrokePrimary * 3.25
     }" text-anchor="middle">${this.getDay()}</text>`;
     svg += `</g>`;
@@ -345,7 +376,7 @@ text.small {
     return svg;
   }
 
-  getTimezoneOffset(): string {
+  protected getTimezoneOffset(): string {
     const utcOffset = this._datetime.getTimezoneOffset();
 
     return (
@@ -358,7 +389,7 @@ text.small {
     );
   }
 
-  getDate(): string {
+  protected getDate(): string {
     return (
       this._datetime.getFullYear() +
       "-" +
@@ -368,11 +399,11 @@ text.small {
     );
   }
 
-  getDay(): string {
+  protected getDay(): string {
     return ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"][this.datetime.getDay()];
   }
 
-  getSvgCircle(): string {
+  protected getSvgCircle(): string {
     const center = this.center;
     const radiusHours = this.radiusHours;
 
@@ -407,7 +438,7 @@ text.small {
     return polyCoordinates.join();
   }
 
-  drawNewDay(): void {
+  protected drawNewDay(): void {
     this.sunState =
       this._longitude !== undefined && this._latitude !== undefined
         ? new TwentyfourSun(this._longitude, this._latitude, this._datetime, 0)
@@ -419,7 +450,7 @@ text.small {
     (this.elements.svg.querySelector("#lat") as SVGTextElement).innerHTML = this.latitudeString;
   }
 
-  getLight(hours: number, minutes: number): TwentyfourSunState {
+  protected getLight(hours: number, minutes: number): TwentyfourSunState {
     if (!this.sunState) {
       return "day";
     }
@@ -428,11 +459,11 @@ text.small {
     return this.sunState.getSunState(this.twilightDegree);
   }
 
-  getCircleCoordinates(angle: number, radius: number): number[] {
+  protected getCircleCoordinates(angle: number, radius: number): number[] {
     return [Math.sin((-angle / 180) * Math.PI) * radius, Math.cos((angle / 180) * Math.PI) * radius];
   }
 
-  rotateWatchhands(): void {
+  protected rotateWatchhands(): void {
     const oldDate = this.getDate();
     const ts = new Date().getTime();
     const elapsedTime = ts - this.ts;

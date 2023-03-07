@@ -17,10 +17,7 @@ npm install twentyfour-hours-clock --save
 Instead of a local installation you may also load the library from https://unpkg.com/. Beware: This makes https://unpkg.com/ a dependency of your project and may pose data protection issues.
 
 ```html
-<script
-  type="module"
-  src="https://unpkg.com/twentyfour-hours-clock@latest/dist/twentyfour-hours-clock.js"
-></script>
+<script type="module" src="https://unpkg.com/twentyfour-hours-clock@latest/dist/twentyfour-hours-clock.js"></script>
 ```
 
 Everything required for the front-end functionality of this web component is contained in [`twentyfour-hours-clock.js`](./dist/twentyfour-hours-clock.js).
@@ -60,8 +57,8 @@ Properties can be set on initialization via HTML attributes, or selecting the DO
 
 | Name              | Type                  | Default      | Description                                                                                                                                                                                                 |
 | ----------------- | --------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `width`           | ?`number`             | `512`        | Width of element in pixels                                                                                                                                                                                  |
-| `height`          | ?`number`             | `512`        | Height of element in pixels                                                                                                                                                                                 |
+| `width`           | ?`number`             | `256`        | Width of element in pixels                                                                                                                                                                                  |
+| `height`          | ?`number`             | `256`        | Height of element in pixels                                                                                                                                                                                 |
 | `datetime`        | ?`string`             | current date | String to set clock to (see [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/parse)). Will be set to current time if empty. Example: `2011-10-10T14:48:00`.\* |
 | `longitude`       | ?`number` \| `"auto"` | `undefined`  | Decimal longitude. Set to `"auto"` to ask browser for geolocation                                                                                                                                           |
 | `latitude`        | ?`number` \| `"auto"` | `undefined`  | Decimal latitude. Set to `"auto"` to ask browser for geolocation                                                                                                                                            |

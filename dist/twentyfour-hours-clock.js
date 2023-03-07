@@ -1,12 +1,12 @@
 class TwentyfourHourClock extends HTMLElement {
     static get observedAttributes() {
-        return ["datetime", "longitude", "latitude", "frequency", "twilight-degree"];
+        return ["datetime", "longitude", "latitude", "frequency", "twilight-degree", "width", "height"];
     }
     constructor() {
         var _a, _b, _c, _d, _e;
         super();
-        this.width = 256;
-        this.height = 256;
+        this._width = 256;
+        this._height = 256;
         this._twilightDegree = -6;
         this.interval = 1000;
         this.elements = {
@@ -29,8 +29,8 @@ class TwentyfourHourClock extends HTMLElement {
             this._longitude = (_a = this.getAttributeNumerical("longitude")) !== null && _a !== void 0 ? _a : this._longitude;
             this._latitude = (_b = this.getAttributeNumerical("latitude")) !== null && _b !== void 0 ? _b : this._latitude;
         }
-        this.width = (_c = this.getAttributeNumerical("width")) !== null && _c !== void 0 ? _c : this.width;
-        this.height = (_d = this.getAttributeNumerical("height")) !== null && _d !== void 0 ? _d : this.height;
+        this._width = (_c = this.getAttributeNumerical("width")) !== null && _c !== void 0 ? _c : this._width;
+        this._height = (_d = this.getAttributeNumerical("height")) !== null && _d !== void 0 ? _d : this._height;
         this._twilightDegree = (_e = this.getAttributeNumerical("twilight-degree")) !== null && _e !== void 0 ? _e : this._twilightDegree;
         const dt = this.getAttribute("datetime");
         this._datetime = dt ? new Date(dt) : new Date();
@@ -38,10 +38,9 @@ class TwentyfourHourClock extends HTMLElement {
             this._longitude !== undefined && this._latitude !== undefined
                 ? new TwentyfourSun(this._longitude, this._latitude, this._datetime, 0)
                 : undefined;
-        this.elements.style.innerHTML = this.getStyle();
-        this.elements.svg.innerHTML = this.getSvg();
+        this.draw();
         let shadowRoot = this.attachShadow({ mode: "open" });
-        this.elements.svg.appendChild(this.elements.style);
+        shadowRoot.appendChild(this.elements.style);
         shadowRoot.appendChild(this.elements.svg);
     }
     connectedCallback() {
@@ -71,6 +70,12 @@ class TwentyfourHourClock extends HTMLElement {
                 break;
             case "latitude":
                 this.latitude = Number(newValue);
+                break;
+            case "width":
+                this.width = Number(newValue);
+                break;
+            case "height":
+                this.height = Number(newValue);
                 break;
         }
     }
@@ -147,6 +152,24 @@ class TwentyfourHourClock extends HTMLElement {
         lat += "′";
         return lat;
     }
+    set width(width) {
+        this._width = width;
+        this.draw();
+    }
+    get width() {
+        return this._width;
+    }
+    set height(height) {
+        this._height = height;
+        this.draw();
+    }
+    get height() {
+        return this._height;
+    }
+    draw() {
+        this.elements.style.innerHTML = this.getStyle();
+        this.elements.svg.innerHTML = this.getSvg();
+    }
     getAttributeNumerical(attrName) {
         const attr = this.getAttribute(attrName);
         return attr !== null ? Number(attr) : null;
@@ -211,6 +234,9 @@ text.small {
 .secondary {
   ${leUnit <= 2.5 ? "display: none" : ""}
 }
+.tertiarty {
+  ${leUnit <= 3.5 ? "display: none" : ""}
+}
 `;
     }
     getSvg() {
@@ -255,13 +281,13 @@ text.small {
         }
         svg += `</g>`;
         svg += `<g inkscape:groupmode="layer" inkscape:label="Extra information">`;
-        /*svg += `<text id="utc" class="secondary" x="${center.x}" y="${
+        /*svg += `<text id="utc" class="tertiarty" x="${center.x}" y="${
           center.y - lengthStrokePrimary
         }" text-anchor="middle">UTC ${this.getTimezoneOffset()}</text>`;*/
-        svg += `<text id="lon" class="secondary small" x="${center.x}" y="${center.y - lengthStrokePrimary * 1}" text-anchor="middle">${this.longitudeString}</text>`;
-        svg += `<text id="lat" class="secondary small" x="${center.x}" y="${center.y - lengthStrokePrimary * 2}" text-anchor="middle">${this.latitudeString}</text>`;
-        svg += `<text id="date" class="secondary" x="${center.x}" y="${center.y + lengthStrokePrimary * 2}" text-anchor="middle">${this.getDate()}</text>`;
-        svg += `<text id="day" class="secondary" x="${center.x}" y="${center.y + lengthStrokePrimary * 3.25}" text-anchor="middle">${this.getDay()}</text>`;
+        svg += `<text id="lon" class="tertiarty small" x="${center.x}" y="${center.y - lengthStrokePrimary * 1}" text-anchor="middle">${this.longitudeString}</text>`;
+        svg += `<text id="lat" class="tertiarty small" x="${center.x}" y="${center.y - lengthStrokePrimary * 2}" text-anchor="middle">${this.latitudeString}</text>`;
+        svg += `<text id="date" class="tertiarty" x="${center.x}" y="${center.y + lengthStrokePrimary * 2}" text-anchor="middle">${this.getDate()}</text>`;
+        svg += `<text id="day" class="tertiarty" x="${center.x}" y="${center.y + lengthStrokePrimary * 3.25}" text-anchor="middle">${this.getDay()}</text>`;
         svg += `</g>`;
         svg += `</svg>`;
         return svg;

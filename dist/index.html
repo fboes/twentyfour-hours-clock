@@ -99,7 +99,7 @@
     <h1>Twenty-four hours clock</h1>
     <div>
       <twentyfour-hours-clock id="twentyfour-one" width="512" height="512" longitude="auto" latitude="auto"></twentyfour-hours-clock>
-      <p>A Web Component showing a 24h clock, build as Scalabale Vector Graphic (SVG). The hour hand does a complete circle every 24h (instead of 12h like on a regular watchface). If the clock is given geo coordinates it is also able to show day, night and twilight.</p>
+      <p>A Web Component showing a 24h clock, build as Scalable Vector Graphic (SVG). The hour hand does a complete circle every 24h (instead of 12h like on a regular watchface). If the clock is given geo coordinates it is also able to show day, night and twilight.</p>
     </div>
     <h2>Properties</h2>
     <div class="form">
@@ -122,6 +122,14 @@
       <label>
         <code>datetime</code>
         <input type="datetime-local" name="datetime" oninput="twentyfour.setAttribute(this.name, this.value);" />
+      </label>
+      <label>
+        <code>width</code>
+        <input type="range" value="512" min="32" max="512" name="width" oninput="twentyfour.setAttribute(this.name, this.value);" />
+      </label>
+      <label>
+        <code>height</code>
+        <input type="range" value="512" min="32" max="512" name="height" oninput="twentyfour.setAttribute(this.name, this.value);" />
       </label>
     </div>
     <h2>CSS Variables</h2>
