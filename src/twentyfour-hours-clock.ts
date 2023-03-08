@@ -297,17 +297,17 @@ text.small {
     svg += `<g inkscape:groupmode="layer" inkscape:label="Watchhands">`;
     svg += `<line id="watchhand-seconds" x1="${center.x}" y1="${center.y}" x2="${center.x}" y2="${
       radiusMinutes + lengthStroke * 1.5
-    }" transform="rotate(${this.angleSeconds} ${center.x} ${center.y})" />`;
+    }" transform-origin="${center.x} ${center.y}" transform="rotate(${this.angleSeconds})" />`;
     svg += `<line id="watchhand-minutes" x1="${center.x}" y1="${center.y}" x2="${center.x}" y2="${
       radiusMinutes + lengthStroke * 2.4
-    }" transform="rotate(${this.angleMinutes} ${center.x} ${center.y})" />`;
+    }" transform-origin="${center.x} ${center.y}" transform="rotate(${this.angleMinutes})" />`;
     svg += `<line id="watchhand-hours" x1="${center.x}" y1="${center.y}" x2="${center.x}" y2="${
       radiusHours + lengthStroke * 2.4
-    }" transform="rotate(${this.angleHours} ${center.x} ${center.y})" />`;
+    }" transform-origin="${center.x} ${center.y}" transform="rotate(${this.angleHours})" />`;
 
     svg += `<circle id="watchhand-hours-utc" cx="${center.x}" cy="${radiusHours + lengthStroke * 2.4}" r="${
       lengthStroke / 2.5
-    }" transform="rotate(${this.angleHoursUtc} ${center.x} ${center.y})" />`;
+    }" transform-origin="${center.x} ${center.y}" transform="rotate(${this.angleHoursUtc})" />`;
     svg += `</g>`;
 
     svg += `<g inkscape:groupmode="layer" inkscape:label="Minutes">`;
@@ -468,23 +468,22 @@ text.small {
     const ts = new Date().getTime();
     const elapsedTime = ts - this.ts;
     this.ts = ts;
-    const center = this.center;
     this._datetime.setMilliseconds(this._datetime.getMilliseconds() + elapsedTime);
     (this.elements.svg.querySelector("#watchhand-seconds") as SVGLineElement).setAttribute(
       "transform",
-      `rotate(${this.angleSeconds} ${center.x} ${center.y})`
+      `rotate(${this.angleSeconds})`
     );
     (this.elements.svg.querySelector("#watchhand-minutes") as SVGLineElement).setAttribute(
       "transform",
-      `rotate(${this.angleMinutes} ${center.x} ${center.y})`
+      `rotate(${this.angleMinutes})`
     );
     (this.elements.svg.querySelector("#watchhand-hours") as SVGLineElement).setAttribute(
       "transform",
-      `rotate(${this.angleHours} ${center.x} ${center.y})`
+      `rotate(${this.angleHours})`
     );
     (this.elements.svg.querySelector("#watchhand-hours-utc") as SVGLineElement).setAttribute(
       "transform",
-      `rotate(${this.angleHoursUtc} ${center.x} ${center.y})`
+      `rotate(${this.angleHoursUtc})`
     );
     //(this.elements.svg.querySelector("#utc") as SVGTextElement).innerHTML = "UTC " + this.getTimezoneOffset();
 
